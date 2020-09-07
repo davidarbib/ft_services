@@ -1,2 +1,5 @@
-sudo apt install conntrack
-sudo minikube --driver=none start
+#!/bin/sh
+sudo minikube --vm-driver=docker start
+
+# Nginx
+docker build -t nginx_custom ./nginx_srcs

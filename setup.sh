@@ -1,9 +1,8 @@
 #!/bin/sh
-sudo usermod -aG docker user42; newgrp docker
-cd ~/.minikube
-sudo chown -R user42:user42 .
-cd
-minikube --vm-driver=none start
+#sudo usermod -aG docker user42; newgrp docker
+#echo "test"
+sudo chown -R user42:user42 ~/.minikube
+minikube --vm-driver=docker start
 
 # Nginx
 docker build -t nginx_custom ./nginx_srcs

@@ -15,11 +15,11 @@ RUN chown -R www:www /www
 RUN mkdir -p /run/nginx
 
 #---configure SSL---
-#RUN cd /var \
-#	&& mkdir certs \ 
-#	&& cd certs \
-#	&& openssl req -new -newkey rsa:2048 -nodes -out ft_services_nginx.csr -keyout ft_services_nginx.key -subj "/C=FR/ST=IDF/L=Paris/O=42/CN=ft_services.com" \
-#	&& openssl x509 -req -days 365 -in ft_services_nginx.csr -signkey ft_services_nginx.key -out ft_services_nginx.crt
+RUN cd /var \
+	&& mkdir certs \ 
+	&& cd certs \
+	&& openssl req -new -newkey rsa:2048 -nodes -out ft_services_nginx.csr -keyout ft_services.key -subj "/C=FR/ST=IDF/L=Paris/O=42/CN=ft_services.com" \
+	&& openssl x509 -req -days 365 -in ft_services.csr -signkey ft_services.key -out ft_services.crt
 
 ##---configure Nginx---
 COPY nginx.conf /etc/nginx/nginx.conf

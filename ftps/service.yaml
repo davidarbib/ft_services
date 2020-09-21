@@ -10,21 +10,6 @@ spec:
                 - name : active1-ftp
                   protocol: TCP
                   port: 21
-                - name : active2-ftp
-                  protocol: TCP
-                  port: 20
                 - name : passive1-ftp
                   protocol: TCP
                   port: 30020
-                - name : passive2-ftp
-                  protocol: TCP
-                  port: 30021
-                - name : passive3-ftp
-                  protocol: TCP
-                  port: 30022
-                - name : passive4-ftp
-                  protocol: TCP
-                  port: 30023
-                - name : passive5-ftp
-                  protocol: TCP
-                  port: 30024

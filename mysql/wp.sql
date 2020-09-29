@@ -1,6 +1,4 @@
 CREATE DATABASE wordpress;
-GRANT ALL PRIVILEGES on wordpress.* to 'root'@localhost;
+GRANT ALL PRIVILEGES on wordpress.* to 'toto'@'%' identified by '1234';
 FLUSH PRIVILEGES;
-USE wordpress;
-CREATE TABLE test (field VARCHAR(20));
-insert into test values("coucou");
+EXIT

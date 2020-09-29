@@ -1,5 +1,5 @@
 #!/bin/sh
-mysqld --user=$(MYSQL_USER) &
+mysqld --user=root &
 sleep 4
-mysql -u $(MYSQL_USER) < /home/wp.sql
+mysql -u root < /home/wp.sql
 sh

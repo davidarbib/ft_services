@@ -30,15 +30,17 @@ RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl p
 #RUN chown -R lighttpd /usr/share/webapps/
 #RUN ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
 
-#COPY wp-config.php /usr/share/webapps/wordpress/wp-config.php
-RUN apk add mysql-client
+COPY wp-config.php /usr/share/webapps/wordpress/wp-config.php
+#COPY setup_wp.sh /home/setup_wp.sh
 
-CMD sh
+#CMD /home/setup_wp.sh
 
+ENTRYPOINT ["php", "-S", "0.0.0.0:80", "-t", "/usr/share/webapps/wordpress"]
+
+#ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 
 ##---configure phpMyAdmin---
 #COPY phpMyAdmin-5.0.1-all-languages.tar.gz /tmp/phpMyAdmin-5.0.1-all-languages.tar.gz
 #RUN tar -xf /tmp/phpMyAdmin-5.0.1-all-languages.tar.gz -C /tmp \
 #	&& mv /tmp/phpMyAdmin-5.0.1-all-languages /tmp/phpmyadmin \
 #	&& cp -a /tmp/phpmyadmin /var/www/html/ft_server.com
 
-#ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 

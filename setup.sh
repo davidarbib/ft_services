@@ -23,3 +23,18 @@ kubectl apply -f nginx_srcs/service.yaml
 docker build -t ftps_custom:v1 ./ftps
 kubectl apply -f ftps/deployment.yaml
 kubectl apply -f ftps/service.yaml
+
+# MySQL
+docker build -t mysql_custom:v1 ./mysql
+kubectl apply -f mysql/deployment.yaml
+kubectl apply -f mysql/service.yaml
+
+# Wordpress
+docker build -t wordpress_custom:v1 ./wordpress
+kubectl apply -f wordpress/deployment.yaml
+kubectl apply -f wordpress/service.yaml
+
+# PhpMyAdmin
+docker build -t phpmyadmin_custom:v1 ./phpmyadmin
+kubectl apply -f phpmyadmin/deployment.yaml
+kubectl apply -f phpmyadmin/service.yaml

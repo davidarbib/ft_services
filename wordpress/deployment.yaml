@@ -1,22 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-        name: ftps-deploy
+        name: wordpress-deploy
         labels:
-                app: ftps
+                app: wordpress
 spec:
         replicas: 1
         selector: 
                 matchLabels: 
-                        app: ftps
+                        app: wordpress
         template:
                 metadata: 
                         labels: 
-                                app: ftps
+                                app: wordpress
                 spec:
                         containers:
-                                - name: ftps
-                                  image: ftps_custom:v1
+                                - name: wordpress
+                                  image: wordpress_custom:v1
                                   ports:
-                                          - containerPort : 21
-                                          - containerPort : 30020
+                                          - containerPort : 80

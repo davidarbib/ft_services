@@ -1,14 +1,5 @@
 FROM alpine:3.12
 
-#---Set env---
-ENV TIMEZONE Europe/Paris
-ENV MYSQL_ROOT_PASSWORD 1234
-ENV MYSQL_DATABASE wordpress
-ENV MYSQL_USER root
-ENV MYSQL_PASSWORD password
-ENV MYSQL_USER_MONITORING monitor
-ENV MYSQL_PASSWORD_MONITORING monitor
-
 #---Setting repos---
 RUN apk update
 
@@ -32,7 +23,6 @@ RUN mkdir -p /run/mysqld
 COPY wp.sql /home/wp.sql
 COPY setup_mysql.sh /home
 RUN sed -i 's/skip-networking/# skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
-CMD sh /home/setup_mysql.sh
-
-#ENTRYPOINT ["./db_setup.sh"] 
+#CMD sh /home/setup_mysql.sh
+ENTRYPOINT ["sh", "/home/setup_mysql.sh"] 
 #ENTRYPOINT ["/usr/bin/msqld", "--console"] 

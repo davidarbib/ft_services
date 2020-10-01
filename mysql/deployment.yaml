@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-        name: mysql-deploy
+        name: mysql
         labels:
                 app: mysql
 spec:
@@ -18,4 +18,4 @@ spec:
                                 - name: mysql
                                   image: mysql_custom:v1
                                   ports:
-                                          - containerPort : 5051
+                                          - containerPort : 3306

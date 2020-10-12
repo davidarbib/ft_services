@@ -3,6 +3,12 @@ FROM alpine:3.12
 #---Setting repos---
 RUN apk update
 
+RUN apk add influxdb
+COPY influxdb.conf /etc/influxdb.conf
+
+RUN apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+COPY telegraf.conf /etc/telegraf.conf
+
 COPY grafana-7.2.0.linux-amd64.tar.gz /tmp/grafana-7.2.0.linux-amd64.tar.gz
 
 #---install grafana---
@@ -18,7 +24,7 @@ RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl p
 #RUN ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
 
 CMD sh
-#ENTRYPOINT ["php", "-S", "0.0.0.0:8000", "-t", "/usr/share/webapps/phpMyAdmin-5.0.1-all-languages"]
+#ENTRYPOINT ["php", "-S", "0.0.0.0:8000", "-t", "/usr/share/webapps/grafana-7.2.0.linux-amd64"]
 
 #ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 
 ##---configure phpMyAdmin---

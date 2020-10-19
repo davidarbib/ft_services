@@ -9,21 +9,23 @@ COPY influxdb.conf /etc/influxdb.conf
 RUN apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 COPY telegraf.conf /etc/telegraf.conf
 
-COPY grafana-7.2.0.linux-amd64.tar.gz /tmp/grafana-7.2.0.linux-amd64.tar.gz
+RUN apk add grafana --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+#COPY grafana-7.2.0.linux-amd64.tar.gz /tmp/grafana-7.2.0.linux-amd64.tar.gz
 
 #---install grafana---
-RUN mkdir -p /usr/share/webapps/ \
-&& cd /usr/share/webapps \
-&& cp /tmp/grafana-7.2.0.linux-amd64.tar.gz . \
-&& tar -xzvf grafana-7.2.0.linux-amd64.tar.gz \
-&& rm grafana-7.2.0.linux-amd64.tar.gz
+#RUN mkdir -p /usr/share/webapps/ \
+#&& cd /usr/share/webapps \
+#&& cp /tmp/grafana-7.2.0.linux-amd64.tar.gz . \
+#&& tar -xzvf grafana-7.2.0.linux-amd64.tar.gz \
+#&& rm grafana-7.2.0.linux-amd64.tar.gz
 
 #---install php---
 RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
 #RUN chown -R lighttpd /usr/share/webapps/
 #RUN ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
+COPY init.sh /home/init.sh
 
-CMD sh
+CMD sh /home/init.sh
 #ENTRYPOINT ["php", "-S", "0.0.0.0:8000", "-t", "/usr/share/webapps/grafana-7.2.0.linux-amd64"]
 
 #ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 

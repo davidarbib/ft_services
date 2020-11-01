@@ -40,7 +40,4 @@ RUN chmod 740 /home/setup_wp.sh
 RUN chown -R root:root /www/wordpress
 RUN chown root:root /www/index.html
 
-#CMD sh
-#ENTRYPOINT nginx -g "daemon off;"
 ENTRYPOINT /home/setup_wp.sh
-

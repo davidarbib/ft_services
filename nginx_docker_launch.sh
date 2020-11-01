@@ -1,3 +1,5 @@
 #!/bin/sh
-docker build -t nginx_custom ./nginx_srcs
-docker run -ti -p 8080:80 --name custom nginx_custom 
+docker stop custom
+docker rm custom
+docker build -t nginx_custom:v1 ./nginx_srcs
+docker run -ti -p 8080:80 --name custom nginx_custom:v1

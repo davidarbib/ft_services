@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-        name: phpmyadmin-deploy
+        name: grafana
         labels:
-                app: phpmyadmin
+                app: grafana
 spec:
         replicas: 1
         selector: 
                 matchLabels: 
-                        app: phpmyadmin
+                        app: grafana
         template:
                 metadata: 
                         labels: 
-                                app: phpmyadmin
+                                app: grafana
                 spec:
                         containers:
-                                - name: phpmyadmin
-                                  image: phpmyadmin_custom:v1
+                                - name: grafana
+                                  image: grafana_custom:v1
                                   ports:
-                                          - containerPort : 8000
+                                          - containerPort : 3000

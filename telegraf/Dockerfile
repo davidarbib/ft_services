@@ -6,6 +6,6 @@ RUN apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/test
 
 COPY telegraf.conf /etc/telegraf.conf
 
-CMD sh
+#CMD sh
 
-#ENTRYPOINT ["telegraf", "--config", "/etc/telegraf.conf"] 
+ENTRYPOINT ["telegraf", "--config", "/etc/telegraf.conf"] 

@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-        name: phpmyadmin
+        name: influxdb
 spec:
-        type: LoadBalancer
+        type: ClusterIP
         selector:
-                app: phpmyadmin
+                app: influxdb
         ports:
                 - name: http
                   protocol: TCP
-                  port: 5000
-                  targetPort: 8000
+                  port: 8086
+                  targetPort: 8086

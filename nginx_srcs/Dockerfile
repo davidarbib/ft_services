@@ -28,4 +28,5 @@ COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 COPY index.html /www/index.html
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
+#ENTRYPOINT sh home/init.sh
 #CMD ["nginx", "-g", "daemon off;", "tail", "-f", "/dev/null"]

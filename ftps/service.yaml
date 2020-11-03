@@ -6,7 +6,7 @@ metadata:
             metallb.universe.tf/allow-shared-ip: sharing key
 spec:
         type: LoadBalancer
-        loadBalancerIP: 172.17.0.200
+        loadBalancerIP: 192.168.49.200 
         selector:
                 app: ftps
         ports:

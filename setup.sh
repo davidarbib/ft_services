@@ -18,7 +18,6 @@ eval $(minikube docker-env)
 #kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 #kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 minikube addons enable metallb
-
 kubectl apply -f metallb/configmap.yaml
 
 ## Nginx
@@ -52,7 +51,7 @@ kubectl apply -f influxdb/
 
 # Telegraf
 docker build -t telegraf_custom:v1 ./telegraf
-kubectl apply -f telegraf/
+#kubectl apply -f telegraf/
 
 # Grafana
 docker build -t grafana_custom:v1 ./grafana

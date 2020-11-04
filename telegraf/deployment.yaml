@@ -15,8 +15,6 @@ spec:
             serviceAccountName: telegraf-account
             containers:
                 - image: telegraf_custom:v1
-                  ports:
-                      - containerPort: 35000
                   name: telegraf
                   envFrom:
                       - secretRef:
@@ -30,4 +28,3 @@ spec:
                 - name: telegraf-config-volume
                   configMap:
                     name: telegraf-config
-

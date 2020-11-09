@@ -26,11 +26,11 @@ RUN apk add grafana --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testi
 #COPY init.sh /home/init.sh
 
 #---set datasources and dashboard---
-COPY default.yaml /usr/share/grafana/conf/provisioning/datasources/default.yaml
-COPY aa /usr/share/grafana/conf/provisioning/datasources/default.yaml
+#COPY default.yaml /usr/share/grafana/conf/provisioning/datasources/default.yaml
+COPY influx_src.yaml /usr/share/grafana/conf/provisioning/datasources/default.yaml
 COPY default_db.yaml /usr/share/grafana/conf/provisioning/dashboards/default.yaml
 COPY ft_services.json /var/lib/grafana/dashboards/ft_services.json 
-COPY cluster.json /var/lib/grafana/dashboards/cluster.json 
+#COPY cluster.json /var/lib/grafana/dashboards/cluster.json 
 
 ENTRYPOINT grafana-server -config /etc/grafana.ini -homepath /usr/share/grafana
 #ENTRYPOINT ["php", "-S", "0.0.0.0:8000", "-t", "/usr/share/webapps/grafana-7.2.0.linux-amd64"]

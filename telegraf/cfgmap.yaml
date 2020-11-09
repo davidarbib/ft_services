@@ -10,17 +10,15 @@ data:
         username = "$INFLUXDB_USER"
         password = "$INFLUXDB_USER_PASSWORD"
 
-        [[inputs.kube_inventory]]
-        url = "https://kubernetes"
-        insecure_skip_verify = true
-        response_timeout="20s"
-        #namespace = ""
-        #bearer_token = "/run/secrets/kubernetes.io/serviceaccount/token"
-
-        selector_include = []
-        selector_exclude = ["*"]
-
-        #[[inputs.kubernetes]]
-
-        #url = "http://127.0.0.1:10250"
-        #insecure_skip_verify = true
+        [[inputs.docker]]
+        endpoint = "unix:///var/run/docker.sock"
+        gather_services = false
+        container_names = []
+        source_tag = false
+        container_name_include = []
+        container_name_exclude = []
+        timeout = "5s"
+        perdevice = true
+        total = false
+        docker_label_include = []
+        docker_label_exclude = ["*annotation.kubernetes*"]

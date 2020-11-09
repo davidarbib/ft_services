@@ -12,7 +12,6 @@ spec:
             labels:
                 app: telegraf
         spec:
-            serviceAccountName: telegraf-account
             containers:
                 - image: telegraf_custom:v1
                   name: telegraf
@@ -24,7 +23,12 @@ spec:
                         mountPath: /etc/telegraf.conf
                         subPath: telegraf.conf
                         readOnly: true
+                      - name: docker-socket
+                        mountPath: "/var/run/docker.sock"
             volumes:
                 - name: telegraf-config-volume
                   configMap:
                     name: telegraf-config
+                - name: docker-socket
+                  hostPath:
+                    path: /var/run/docker.sock

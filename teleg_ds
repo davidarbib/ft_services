@@ -1,0 +1,40 @@
+piVersion: v1
+kind: ConfigMap
+metadata:
+    name: telegraf
+    namespace: monitoring
+    labels:
+        k8s-app: telegraf
+        data:
+            telegraf.conf: |+
+                [global_tags]
+                env = "$ENV"
+                [agent]
+                hostname = "$HOSTNAME"
+                [[outputs.influxdb]]
+                urls = ["$MONITOR_HOST"] # required
+                database = "$MONITOR_DATABASE" # required
+
+                timeout = "5s"
+                username = "$MONITOR_USERNAME"
+                password = "$MONITOR_PASSWORD"
+
+                [[inputs.cpu]]
+                percpu = true
+                totalcpu = true
+                collect_cpu_time = false
+                report_active = false
+                [[inputs.disk]]
+                ignore_fs = ["tmpfs", "devtmpfs", "devfs"]
+                [[inputs.diskio]]
+                [[inputs.kernel]]
+                [[inputs.mem]]
+                [[inputs.processes]]
+                [[inputs.swap]]
+                [[inputs.system]]
+                [[inputs.docker]]
+                endpoint = "unix:///var/run/docker.sock"
+                [[inputs.kubernetes]]
+                url = "http://1.1.1.1:10255"
+
+                ---

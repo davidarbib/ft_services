@@ -27,6 +27,8 @@ USE `test`;
 -- Base de données : `wordpress`
 --
 CREATE DATABASE IF NOT EXISTS `wordpress` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+GRANT ALL PRIVILEGES on wordpress.* to 'toto'@'%' identified by '1234';
+FLUSH PRIVILEGES;
 USE `wordpress`;
 
 -- --------------------------------------------------------

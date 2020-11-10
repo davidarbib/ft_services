@@ -19,11 +19,11 @@ spec:
                                   image: mysql_custom:v1
                                   ports:
                                           - containerPort : 3306
-                                            #                                  volumeMounts: 
-                                            #                                          - mountPath: /var/lib/mysql
-                                            #                                            name: var-lib-mysql
-                                            #        restartPolicy: Always
-                                            #        volumes:
-                                            #            - name: var-lib-mysql
-                                            #              persistentVolumeClaim:
-                                            #                  claimName: mysql-pvc
+                                  volumeMounts: 
+                                       - mountPath: /var/lib/mysql
+                                         name: var-lib-mysql
+                        restartPolicy: Always
+                        volumes:
+                                - name: var-lib-mysql
+                                  persistentVolumeClaim:
+                                        claimName: mysql-pvc

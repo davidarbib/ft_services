@@ -11,4 +11,5 @@ datasources:
       basic_auth: false
       jsonData:
           httpMethod: GET
+          timeInterval: "1s"
       # is_default: true

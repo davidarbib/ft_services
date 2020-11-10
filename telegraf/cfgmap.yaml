@@ -4,6 +4,9 @@ metadata:
     name: telegraf-config
 data:
     telegraf.conf: |+
+        [agent]
+        interval = "5s"
+
         [[outputs.influxdb]]
         urls = ["$INFLUXDB_URL"]
         database = "$INFLUXDB_DB"

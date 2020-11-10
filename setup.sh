@@ -29,6 +29,7 @@ kubectl apply -f ftps/service.yaml
 #
 # MySQL
 docker build -t mysql_custom:v1 ./mysql
+kubectl apply -f mysql/mysqlpvc.yaml
 kubectl apply -f mysql/deployment.yaml
 kubectl apply -f mysql/service.yaml
 #
@@ -49,7 +50,7 @@ kubectl apply -f influxdb/
 # Telegraf
 docker build -t telegraf_custom:v1 ./telegraf
 kubectl apply -f telegraf/
-kubectl rollout restart deployment.apps/telegraf
+#kubectl rollout restart deployment.apps/telegraf
 
 # Grafana
 docker build -t grafana_custom:v1 ./grafana

@@ -7,8 +7,3 @@ RUN apk add influxdb
 COPY influxdb.conf /etc/influxdb.conf
 
 ENTRYPOINT influxd -config /etc/influxdb.conf
-#ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 
-##---configure phpMyAdmin---
-#RUN tar -xf /tmp/phpMyAdmin-5.0.1-all-languages.tar.gz -C /tmp \
-#	&& mv /tmp/phpMyAdmin-5.0.1-all-languages /tmp/phpmyadmin \
-#	&& cp -a /tmp/phpmyadmin /var/www/html/ft_server.com

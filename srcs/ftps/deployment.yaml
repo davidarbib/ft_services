@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-        name: ftps-deploy
+        name: ftps
         labels:
                 app: ftps
 spec:

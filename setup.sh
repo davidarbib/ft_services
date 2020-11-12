@@ -4,12 +4,10 @@ minikube delete
 echo "Check minikube version and install eventually..."
 
 MKUBE_VERSION="$(minikube version | cut -d ' ' -f 3 | head -n 1)"
-if [ "$?" != 0 ] || [ $MKUBE_VERSION != "v1.14.2" ]
+if [ $MKUBE_VERSION != "v1.14.2" ]
 then
 	##---download and install---
-	#curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.14.2/minikube_1.14.2-0_amd64.deb
-	#sudo install minikube-linux-amd64 /usr/local/bin/minikube
 	sudo apt install -i minikube_1.14.2-0_amd64.deb
 	##---------------------------
 fi
@@ -23,43 +21,43 @@ eval $(minikube docker-env)
 
 # MetalLB
 minikube addons enable metallb
-kubectl apply -f metallb/configmap.yaml
+kubectl apply -f srcs/metallb/configmap.yaml
 
 # Nginx
-docker build -t nginx_custom:v1.01 ./nginx_srcs
-kubectl apply -f nginx_srcs/deployment.yaml
-kubectl apply -f nginx_srcs/service.yaml
+docker build -t srcs/nginx_custom:v1.01 ./nginx
+kubectl apply -f srcs/nginx/deployment.yaml
+kubectl apply -f srcs/nginx/service.yaml
 #
 # FTPS
-docker build -t ftps_custom:v1 ./ftps
-kubectl apply -f ftps/deployment.yaml
-kubectl apply -f ftps/service.yaml
+docker build -t srcs/ftps_custom:v1 ./ftps
+kubectl apply -f srcs/ftps/deployment.yaml
+kubectl apply -f srcs/ftps/service.yaml
 
 # MySQL
-docker build -t mysql_custom:v1 ./mysql
-kubectl apply -f mysql/mysqlpvc.yaml
-kubectl apply -f mysql/deployment.yaml
-kubectl apply -f mysql/service.yaml
+docker build -t srcs/mysql_custom:v1 ./mysql
+kubectl apply -f srcs/mysql/mysqlpvc.yaml
+kubectl apply -f srcs/mysql/deployment.yaml
+kubectl apply -f srcs/mysql/service.yaml
 
 # Wordpress
-docker build -t wordpress_custom:v1 ./wordpress
-kubectl apply -f wordpress/deployment.yaml
-kubectl apply -f wordpress/service.yaml
+docker build -t srcs/wordpress_custom:v1 ./wordpress
+kubectl apply -f srcs/wordpress/deployment.yaml
+kubectl apply -f srcs/wordpress/service.yaml
 #
 # PhpMyAdmin
-docker build -t phpmyadmin_custom:v1 ./phpmyadmin
-kubectl apply -f phpmyadmin/deployment.yaml
-kubectl apply -f phpmyadmin/service.yaml
+docker build -t srcs/phpmyadmin_custom:v1 ./phpmyadmin
+kubectl apply -f srcs/phpmyadmin/deployment.yaml
+kubectl apply -f srcs/phpmyadmin/service.yaml
 #
 # Influxdb
-docker build -t influxdb_custom:v1 ./influxdb
-kubectl apply -f influxdb/
+docker build -t srcs/influxdb_custom:v1 ./influxdb
+kubectl apply -f srcs/influxdb/
 #
 # Telegraf
-docker build -t telegraf_custom:v1 ./telegraf
-kubectl apply -f telegraf/
+docker build -t srcs/telegraf_custom:v1 ./telegraf
+kubectl apply -f srcs/telegraf/
 
 # Grafana
-docker build -t grafana_custom:v1 ./grafana
-kubectl apply -f grafana/deployment.yaml
-kubectl apply -f grafana/service.yaml
+docker build -t srcs/grafana_custom:v1 ./grafana
+kubectl apply -f srcs/grafana/deployment.yaml
+kubectl apply -f srcs/grafana/service.yaml

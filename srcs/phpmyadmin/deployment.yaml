@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-        name: wordpress-deploy
+        name: phpmyadmin
         labels:
-                app: wordpress
+                app: phpmyadmin
 spec:
         replicas: 1
         selector: 
                 matchLabels: 
-                        app: wordpress
+                        app: phpmyadmin
         template:
                 metadata: 
                         labels: 
-                                app: wordpress
+                                app: phpmyadmin
                 spec:
                         containers:
-                                - name: wordpress
-                                  image: wordpress_custom:v1
+                                - name: phpmyadmin
+                                  image: phpmyadmin_custom:v1
                                   ports:
-                                          - containerPort : 5050
+                                          - containerPort : 5000
                                   livenessProbe:
                                             exec:
                                                     command:

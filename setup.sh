@@ -1,9 +1,11 @@
 #!/bin/sh
 
+minikube delete
 echo "Check minikube version and install eventually..."
 
 MKUBE_VERSION="$(minikube version | cut -d ' ' -f 3 | head -n 1)"
-if [ $? -eq 0 || $MKUBE_VERSION != "v1.14.2" ]; then
+if [ "$?" != 0 ] || [ $MKUBE_VERSION != "v1.14.2" ]
+then
 	##---download and install---
 	#curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.14.2/minikube_1.14.2-0_amd64.deb

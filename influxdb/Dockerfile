@@ -6,9 +6,6 @@ RUN apk add influxdb
 
 COPY influxdb.conf /etc/influxdb.conf
 
-#RUN apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
-#COPY telegraf.conf /etc/telegraf.conf
-
 ENTRYPOINT influxd -config /etc/influxdb.conf
 #ENTRYPOINT ["lighttpd", "-d", "-f", "/etc/lighttpd/lighttpd.conf"] 
 ##---configure phpMyAdmin---

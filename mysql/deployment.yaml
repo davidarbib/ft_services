@@ -20,8 +20,16 @@ spec:
                                   ports:
                                           - containerPort : 3306
                                   volumeMounts: 
-                                       - mountPath: /var/lib/mysql
-                                         name: var-lib-mysql
+                                          - mountPath: /var/lib/mysql/
+                                            #- mountPath: /home/test
+                                            name: var-lib-mysql
+                                  livenessProbe:
+                                            exec:
+                                                    command:
+                                                            - pgrep
+                                                            - "mysqld"
+                                            initialDelaySeconds: 5
+                                            periodSeconds: 5
                         restartPolicy: Always
                         volumes:
                                 - name: var-lib-mysql

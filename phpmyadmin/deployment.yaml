@@ -19,3 +19,10 @@ spec:
                                   image: phpmyadmin_custom:v1
                                   ports:
                                           - containerPort : 5000
+                                  livenessProbe:
+                                            exec:
+                                                    command:
+                                                            - pgrep
+                                                            - "php"
+                                            initialDelaySeconds: 5
+                                            periodSeconds: 5

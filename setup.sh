@@ -1,9 +1,18 @@
 #!/bin/sh
 
-##---download and install---
-#curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-#sudo install minikube-linux-amd64 /usr/local/bin/minikube
-##---------------------------
+echo "Check minikube version and install eventually..."
+
+MKUBE_VERSION="$(minikube version | cut -d ' ' -f 3 | head -n 1)"
+if [ $? -eq 0 || $MKUBE_VERSION != "v1.14.2" ]; then
+	##---download and install---
+	#curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.14.2/minikube_1.14.2-0_amd64.deb
+	#sudo install minikube-linux-amd64 /usr/local/bin/minikube
+	sudo apt install -i minikube_1.14.2-0_amd64.deb
+	##---------------------------
+fi
+
+echo "Minikube is installed. Launching..."
 
 minikube start --vm-driver=docker --kubernetes-version=v1.19.2
 
@@ -11,9 +20,6 @@ minikube start --vm-driver=docker --kubernetes-version=v1.19.2
 eval $(minikube docker-env)
 
 # MetalLB
-#kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
-#kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-#kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 minikube addons enable metallb
 kubectl apply -f metallb/configmap.yaml
 
@@ -26,31 +32,30 @@ kubectl apply -f nginx_srcs/service.yaml
 docker build -t ftps_custom:v1 ./ftps
 kubectl apply -f ftps/deployment.yaml
 kubectl apply -f ftps/service.yaml
-#
+
 # MySQL
 docker build -t mysql_custom:v1 ./mysql
 kubectl apply -f mysql/mysqlpvc.yaml
 kubectl apply -f mysql/deployment.yaml
 kubectl apply -f mysql/service.yaml
-#
+
 # Wordpress
 docker build -t wordpress_custom:v1 ./wordpress
 kubectl apply -f wordpress/deployment.yaml
 kubectl apply -f wordpress/service.yaml
-##
+#
 # PhpMyAdmin
 docker build -t phpmyadmin_custom:v1 ./phpmyadmin
 kubectl apply -f phpmyadmin/deployment.yaml
 kubectl apply -f phpmyadmin/service.yaml
-
+#
 # Influxdb
 docker build -t influxdb_custom:v1 ./influxdb
 kubectl apply -f influxdb/
-
+#
 # Telegraf
 docker build -t telegraf_custom:v1 ./telegraf
 kubectl apply -f telegraf/
-#kubectl rollout restart deployment.apps/telegraf
 
 # Grafana
 docker build -t grafana_custom:v1 ./grafana

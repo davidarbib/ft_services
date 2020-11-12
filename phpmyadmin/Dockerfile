@@ -27,7 +27,7 @@ RUN cd /www \
 && rm phpMyAdmin-5.0.1-all-languages.tar.gz \
 && mv phpMyAdmin-5.0.1-all-languages phpmyadmin
 
-COPY config.inc.php /www/phpmyadmin/config.sample.inc.php
+COPY config.inc.php /www/phpmyadmin/config.inc.php
 
 #---configure SSL---
 RUN apk add openssl

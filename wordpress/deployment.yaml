@@ -19,3 +19,10 @@ spec:
                                   image: wordpress_custom:v1
                                   ports:
                                           - containerPort : 5050
+                                  livenessProbe:
+                                            exec:
+                                                    command:
+                                                            - pgrep
+                                                            - "php"
+                                            initialDelaySeconds: 5
+                                            periodSeconds: 5

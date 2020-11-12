@@ -19,11 +19,11 @@ spec:
                                   image: influxdb_custom:v1
                                   ports:
                                           - containerPort : 8086
-                                            #                                  volumeMounts: 
-                                            #                                          - mountPath: /var/lib/influxdb
-                                            #                                            name: var-lib-influxdb
-                                            #        restartPolicy: Always
-                                            #        volumes:
-                                            #            - name: var-lib-influxdb
-                                            #              persistentVolumeClaim:
-                                            #                  claimName: influxdb-pvc
+                                  volumeMounts: 
+                                          - mountPath: /var/lib/influxdb
+                                            name: var-lib-influxdb
+                        restartPolicy: Always
+                        volumes:
+                                - name: var-lib-influxdb
+                                  persistentVolumeClaim:
+                                        claimName: influxdb-pvc

@@ -1,8 +1,7 @@
 #!/bin/sh
 
 minikube delete
-echo "Minikube is installed. Launching..."
-
+sudo chmod 666 /var/run/docker.sock
 minikube start --vm-driver=docker --kubernetes-version=v1.19.2
 
 #extract docker infos from minikube env to invoke minikube docker from here
@@ -11,7 +10,9 @@ eval $(minikube docker-env)
 cd srcs
 
 # MetalLB
-minikube addons enable metallb
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f metallb/configmap.yaml
 
 # Nginx
@@ -54,5 +55,4 @@ kubectl apply -f grafana/deployment.yaml
 kubectl apply -f grafana/service.yaml
 
 # Dashboard Kubernetes
-minikube addons enable dashboard
 minikube dashboard

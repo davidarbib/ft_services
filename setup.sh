@@ -1,17 +1,6 @@
 #!/bin/sh
 
 minikube delete
-echo "Check minikube version and install eventually..."
-
-MKUBE_VERSION="$(minikube version | cut -d ' ' -f 3 | head -n 1)"
-if [ $MKUBE_VERSION != "v1.14.2" ]
-then
-	##---download and install---
-	curl -LO https://github.com/kubernetes/minikube/releases/download/v1.14.2/minikube_1.14.2-0_amd64.deb
-	sudo dpkg -i minikube_1.14.2-0_amd64.deb
-	##---------------------------
-fi
-
 echo "Minikube is installed. Launching..."
 
 minikube start --vm-driver=docker --kubernetes-version=v1.19.2
